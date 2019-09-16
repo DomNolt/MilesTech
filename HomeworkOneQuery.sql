@@ -4,7 +4,6 @@ DROP TABLE IF EXISTS Taverns;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Roles;
 DROP TABLE IF EXISTS Locations;
-DROP TABLE IF EXISTS BasementRats;
 
 CREATE TABLE Taverns (
 	id int IDENTITY PRIMARY KEY,
@@ -12,27 +11,19 @@ CREATE TABLE Taverns (
 	location_id int,
 	owner_id int
 );
-
 CREATE TABLE Users (
 	id int IDENTITY PRIMARY KEY,
 	name varchar(50),
 	role_id int
 );
-
 CREATE TABLE Roles (
 	id int IDENTITY PRIMARY KEY,
 	name varchar(50),
 	description varchar(MAX)
 );
-
 CREATE TABLE Locations (
 	id int IDENTITY PRIMARY KEY,
 	name varchar(100)
-);
-
-CREATE TABLE BasementRats (
-	id int IDENTITY PRIMARY KEY,
-	name varchar(50)
 );
 
 --Taverns Rows
@@ -93,53 +84,34 @@ VALUES ('Disney');
 INSERT INTO Locations (name)
 VALUES ('Antartica');
 
---BasementRats Rows
-INSERT INTO BasementRats (name)
-VALUES ('Martha');
-INSERT INTO BasementRats (name)
-VALUES ('Mary');
-INSERT INTO BasementRats (name)
-VALUES ('Joseph');
-INSERT INTO BasementRats (name)
-VALUES ('Joshua');
-INSERT INTO BasementRats (name)
-VALUES ('Alvin');
-INSERT INTO BasementRats (name)
-VALUES ('Chipmunk');
-INSERT INTO BasementRats (name)
-VALUES ('Flamingo');
-
 -- Part 2: Additions from the Homework
 DROP TABLE IF EXISTS Service;
 DROP TABLE IF EXISTS Status;
 DROP TABLE IF EXISTS Supplies;
-DROP TABLE IF EXISTS Guest;
+-- DROP TABLE IF EXISTS Guests;
 DROP TABLE IF EXISTS Sales;
-DROP TABLE IF EXISTS Recieved;
+DROP TABLE IF EXISTS Received;
 DROP TABLE IF EXISTS Inventory;
 
 CREATE TABLE Status (
 	id int IDENTITY PRIMARY KEY,
 	name varchar(25)
 );
-
 CREATE TABLE Service (
 	id int IDENTITY PRIMARY KEY,
 	name varchar(50),
-	status_id int
+	status_id int,
+	tavern_id int
 );
-
 CREATE TABLE Supplies (
 	id int IDENTITY PRIMARY KEY,
 	unit varchar(50),
 	name varchar(50)
 );
-
-CREATE TABLE Guest (
+/*CREATE TABLE Guest (
 	id int IDENTITY PRIMARY KEY,
 	name varchar(50)
-);
-
+);*/
 CREATE TABLE Sales (
 	id int IDENTITY PRIMARY KEY,
 	service_id int,
@@ -149,7 +121,6 @@ CREATE TABLE Sales (
 	amount int,
 	tavern_id int
 );
-
 CREATE TABLE Received (
 	id int IDENTITY PRIMARY KEY,
 	supply_id int,
@@ -158,7 +129,6 @@ CREATE TABLE Received (
 	amount_received int,
 	date_received datetime
 );
-
 CREATE TABLE Inventory (
 	id int IDENTITY PRIMARY KEY,
 	supply_id int,
@@ -197,6 +167,7 @@ VALUES ('crate', 'mutton');
 INSERT INTO Supplies (unit, name)
 VALUES ('shot', 'whiskey');
 
+/*
 --Guest Rows
 INSERT INTO Guest (name)
 VALUES ('howard');
@@ -208,6 +179,7 @@ INSERT INTO Guest (name)
 VALUES ('psycho');
 INSERT INTO Guest (name)
 VALUES ('donald');
+*/
 
 --Sales Rows
 INSERT INTO Sales (service_id, guest_id, price, date_purchased, amount, tavern_id)
